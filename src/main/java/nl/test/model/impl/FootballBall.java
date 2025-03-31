@@ -2,10 +2,10 @@ package nl.test.model.impl;
 
 import nl.test.model.interfaces.Ball;
 
-public class Football implements Ball {
+public class FootballBall implements Ball {
     @Override
     public String getBallName() {
-        return "Football";
+        return "FootballBall";
     }
 
     @Override

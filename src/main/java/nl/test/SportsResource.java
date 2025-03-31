@@ -1,11 +1,12 @@
 package nl.test;
 
+import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
-import nl.test.model.impl.BaseballFactory;
-import nl.test.model.impl.FootballFactory;
+import nl.test.model.annotations.Baseball;
+import nl.test.model.annotations.Football;
 import nl.test.model.interfaces.Ball;
 import nl.test.model.interfaces.Pitch;
 import nl.test.model.interfaces.SportsFactory;
@@ -13,16 +14,24 @@ import nl.test.model.interfaces.SportsFactory;
 @Path("/")
 public class SportsResource {
 
+    @Inject
+    @Baseball
+    SportsFactory baseballFactory;
+
+    @Inject
+    @Football
+    SportsFactory footballFactory;
+
     @Path("football")
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String footballResponse() {
-        SportsFactory factory = new FootballFactory();
-        Ball ball = factory.createBall();
-        Pitch pitch = factory.createPitch();
+        Ball ball = footballFactory.createBall();
+        Pitch pitch = footballFactory.createPitch();
 
         ball.printBallColour();
         pitch.printFieldSize();
+
         return "The ball is %s and the pitch is %s".formatted(ball.getBallName(), pitch.getFieldShape());
     }
 
@@ -30,12 +39,12 @@ public class SportsResource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String baseballResponse() {
-        SportsFactory factory = new BaseballFactory();
-        Ball ball = factory.createBall();
-        Pitch pitch = factory.createPitch();
+        Ball ball = baseballFactory.createBall();
+        Pitch pitch = baseballFactory.createPitch();
 
         ball.printBallColour();
         pitch.printFieldSize();
+
         return "The ball is %s and the pitch is %s".formatted(ball.getBallName(), pitch.getFieldShape());
     }
 }
