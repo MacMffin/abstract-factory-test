@@ -13,7 +13,8 @@ Why is this useful?
 3. **Testability** – It's easy to create mock implementations of a `Factory`, making testing simpler and more isolated.
 
 ### Abstract Factory Pattern in this repo
-In this repository I've tried to create an example of how this can work. In the SportsResource, 
-the client can select between Football and Baseball. Based on this, they get a Factory that inherits
-from an Abstract Factory named SportsFactory. The factories make sure that the client receives a family of 
-related objects. That way, the client doesn't have to think about which concrete classes they need.
+This repository contains a simple example of how the pattern works using a sports analogy.
+
+In the `SportsResource`, the client can select either **Football** or **Baseball**. Based on this choice, a specific factory is injected — each one extending the abstract `SportsFactory`.
+
+Each factory provides a family of related objects, such as a `Ball` and a `Pitch`, that match the chosen sport. This way, the client doesn’t need to know which concrete classes are being used — it just uses the factory and gets the right objects.
